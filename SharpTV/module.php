@@ -2,7 +2,7 @@
 
 // https://github.com/Wolbolar/IPSymconTPLinkHS110
 
-class JHTPLinkHS110 extends IPSModule // Sharp Aquos TV
+class SharpTV extends IPSModule // Sharp Aquos TV
 {
 	public function Create()
 	{

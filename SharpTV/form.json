@@ -1,7 +1,7 @@
 {
     "elements":
             [
-				{ "type": "Label", "label": "TP Link HS device ip address"},
+				{ "type": "Label", "label": "Sharp Aquos TV ip address"},
 				{
                     "name": "Name",
                     "type": "ValidationTextBox",
@@ -23,7 +23,7 @@
                 {
                     "code": 104,
                     "icon": "inactive",
-                    "caption": "TP Link Device is inactive"
+                    "caption": "Sharp Aquos TV is inactive"
                 }
             ]
 }

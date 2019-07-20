@@ -865,7 +865,7 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 			],
 			[
 				'type' => 'Label',
-				'caption' => 'TP Link HS Power On'
+				'caption' => 'Sharp Aquos TV Power On'
 			],
 			[
 				'type' => 'Button',
@@ -874,7 +874,7 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 			],
 			[
 				'type' => 'Label',
-				'caption' => 'TP Link HS Power Off'
+				'caption' => 'Sharp Aquos TV Power Off'
 			],
 			[
 				'type' => 'Button',

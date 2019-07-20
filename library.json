@@ -2,7 +2,7 @@
 	"id": "{F6F8EAFA-4FA0-A1DF-9C39-384F80B6DB88}",
 	"author": "Joachim Hansen",
 	"name": "SharpTV",
-	"url": "git://github.com/yoggiland/JHTPLink.git",
+	"url": "git://github.com/yoggiland/SymconSharpTV.git",
 	"compatibility": {
 		"version": "5.0",
 		"date": 1491343200

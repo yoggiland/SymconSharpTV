@@ -8,8 +8,7 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 	{
 		//Never delete this line!
 		parent::Create();
-        
-		$this->RegisterPropertyString("Ip", "192.168.1.102");
+        $this->RegisterPropertyString("Ip", "192.168.1.102");
         $this->RegisterPropertyString("Port", 10002);
         $this->RegisterPropertyInteger("modelselection", 1);
 		$this->RegisterPropertyInteger("stateinterval", 0);
@@ -667,7 +666,7 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 				'caption' => 'Sharp Aquos TV ip address'
 			],
 			[
-				'name' => 'Host',
+				'name' => 'Ip',
 				'type' => 'ValidationTextBox',
 				'caption' => 'IP adress'
 			],

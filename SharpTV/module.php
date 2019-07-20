@@ -158,7 +158,7 @@ class SharpTV extends IPSModule // Sharp Aquos TV
         $socket = stream_socket_client("{$ip}:{$port}", $errno, $errstr, 3);
         
         if (!$socket) {
-            throw new Exception(pht('Failed to connect, #%d: %s', $errno, $errstr));
+            IPS_LogMessage("SharpTV", "Could not connect to socket ");
          }
         
         if($socket) {

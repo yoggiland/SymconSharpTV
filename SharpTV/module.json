@@ -1,0 +1,11 @@
+{
+	"id": "{7CB0E923-12ED-D4CA-5ACA-1E98A72FD1CB}",
+	"name": "SharpTV",
+	"type": 3,
+	"vendor": "JH TP Link",
+	"aliases": ["JH TP Link HS 110"],
+	"parentRequirements": [],
+	"childRequirements": [],
+	"implemented": [],
+	"prefix": "SharpTV"
+}

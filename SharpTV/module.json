@@ -3,9 +3,9 @@
 	"name": "SharpTV",
 	"type": 3,
 	"vendor": "Sharp",
-	"aliases": ["SharpTV"],
+	"aliases": ["Sharp Aquos TV"],
 	"parentRequirements": [],
 	"childRequirements": [],
 	"implemented": [],
-	"prefix": "SharpTV TV"
+	"prefix": "SharpTV"
 }

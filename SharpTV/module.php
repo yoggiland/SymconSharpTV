@@ -65,10 +65,11 @@ protected function SendToSharpTV($command) // e.g function PowerOn() calls this 
         
         //=================
         if (!$socket) {
-    echo "Unable to open\n";
-} else {
+            echo "Unable to open\n";
+            } else
+            {
 
-    fwrite($socket, "GET / HTTP/1.0\r\n\r\n");
+    fwrite($socket, $command);
     stream_set_timeout($socket, 2);
     $res = fread($socket, 2000);
 

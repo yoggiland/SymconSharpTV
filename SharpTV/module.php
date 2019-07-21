@@ -18,30 +18,12 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 	{
 		//Never delete this line!
 		parent::ApplyChanges();
-
-		if (IPS_GetKernelRunlevel() !== KR_READY) {
-			return;
-		}
-
+        
 		$this->RegisterVariableBoolean("State", "Status", "~Switch", 1);
 		$this->EnableAction("State");
         
         $this->GetConfigurationForParent();// jh test
-        
-		//$model = $this->ReadPropertyInteger("modelselection");
-        /*
-		if ($model == 2) {
-			$this->RegisterProfile('TPLinkHS.Milliampere', '', '', " mA", 0, 0, 0, 0, 2);
-
-			$this->RegisterVariableFloat("Voltage", $this->Translate("Voltage"), "Volt.230", 2);
-			$this->RegisterVariableFloat("Power", $this->Translate("Power"), "Watt.14490", 3);
-			$this->RegisterVariableFloat("Current", $this->Translate("Electricity"), "TPLinkHS.Milliampere", 4);
-			$this->RegisterVariableFloat("Work", $this->Translate("Work"), "Electricity", 5);
-		}
-        
-        */
-		//$this->ValidateConfiguration(); // temp avstangd
-	}
+        }
     
     public function GetConfigurationForParent()
     {
@@ -52,43 +34,6 @@ class SharpTV extends IPSModule // Sharp Aquos TV
         return "{\"Ip\": \"$ip\", \"Port\": \"$port\"}";
         */
         }
-
-	private function ValidateConfiguration()
-	{
-		// Types HS100, HS105, HS110, HS200
-		$host = $this->ReadPropertyString('Host');
-
-		//IP TP Link check
-		if (!filter_var($host, FILTER_VALIDATE_IP) === false) {
-			//IP ok
-			$ipcheck = true;
-		} else {
-			$ipcheck = false;
-		}
-
-		//Domain TP Link Device check
-		if (!$this->is_valid_localdomain($host) === false) {
-			//Domain ok
-			$domaincheck = true;
-		} else {
-			$domaincheck = false;
-		}
-
-		if ($domaincheck === true || $ipcheck === true) {
-			$hostcheck = true;
-			$this->SetStatus(102);
-		} else {
-			$hostcheck = false;
-			$this->SetStatus(203); //IP Adresse oder Host ist ungültig
-		}
-		//$extendedinfo = $this->ReadPropertyBoolean("extendedinfo");
-		if ($extendedinfo) {
-			$this->SendDebug("TP Link:", "extended info activ", 0);
-		}
-		$this->SetStateInterval($hostcheck);
-		$this->SetSystemInfoInterval($hostcheck);
-	}
-
       
 	protected function SendToSharpTV($command) // e.g function PowerOn() calls this function
 	{

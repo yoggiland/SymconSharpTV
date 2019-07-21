@@ -57,34 +57,34 @@ class SharpTV extends IPSModule // Sharp Aquos TV
       
 protected function SendToSharpTV($command) // e.g function PowerOn() calls this function
 	{
-		$ip = $this->ReadPropertyString('Ip');
+        $ip = $this->ReadPropertyString('Ip');
         $port = $this->ReadPropertyString('Port');
         
         //Connect to Server
-        $socket = stream_socket_client("{$ip}:{$port}", $errno, $errstr, 30);
-        
-        //=================
-        if (!$socket) {
-            echo "Unable to open\n";
-            } else
-            {
+        $socket = stream_socket_client("{$ip}:{$port}", $errno, $errstr, 3);
+            //=============================================
+            if (!$socket) {
+    echo "Unable to open\n";
+} else {
 
     fwrite($socket, $command);
     stream_set_timeout($socket, 2);
-    $res = fread($socket, 2000);
+    $buf = fread($socket, 2000);
 
-    $buf = stream_get_meta_data($socket);
+    $info = stream_get_meta_data($socket);
     fclose($socket);
 
-    if ($buf['timed_out']) {
+    if ($info['timed_out']) {
         echo 'Connection timed out!';
     } else {
-        echo $res;
+        return $buf;
+        echo $buf;
     }
 
 }
-            return $buf; 
-    } // spara
+            //=============================================
+            //return $buf;
+} // spara
 //}
 /* backup
 protected function SendToSharpTV($command) // e.g function PowerOn() calls this function

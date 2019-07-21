@@ -77,13 +77,13 @@ protected function SendToSharpTV($command) // e.g function PowerOn() calls this 
     if ($info['timed_out']) {
         echo 'Connection timed out!';
     } else {
-        return $buf;
+        //return $buf;
         echo $buf;
     }
 
 }
             //=============================================
-            //return $buf;
+            return $buf;
 } // spara
 //}
 /* backup

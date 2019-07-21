@@ -28,8 +28,8 @@ class SharpTV extends IPSModule // Sharp Aquos TV
         
         $this->GetConfigurationForParent();// jh test
         
-		$model = $this->ReadPropertyInteger("modelselection");
-        
+		//$model = $this->ReadPropertyInteger("modelselection");
+        /*
 		if ($model == 2) {
 			$this->RegisterProfile('TPLinkHS.Milliampere', '', '', " mA", 0, 0, 0, 0, 2);
 
@@ -38,6 +38,8 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 			$this->RegisterVariableFloat("Current", $this->Translate("Electricity"), "TPLinkHS.Milliampere", 4);
 			$this->RegisterVariableFloat("Work", $this->Translate("Work"), "Electricity", 5);
 		}
+        
+        */
 		//$this->ValidateConfiguration(); // temp avstangd
 	}
     

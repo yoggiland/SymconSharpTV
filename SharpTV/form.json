@@ -13,6 +13,5 @@
 		{ "type": "Button", "label": "Power", "onClick": "SharpTV_Power($id)" },
         { "type": "Button", "label": "Power On", "onClick": "SharpTV_PowerOn($id)" },
         { "type": "Button", "label": "Power Off", "onClick": "SharpTV_PowerOff($id)" }
-        }
     ]   
 }

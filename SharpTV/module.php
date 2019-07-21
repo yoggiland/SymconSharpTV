@@ -25,15 +25,15 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 		//Never delete this line!
 		parent::ApplyChanges();
         
-
-        
-        
 		$this->RegisterVariableBoolean("State", "Status", "~Switch", 1);
 		$this->EnableAction("State");
         
         //$this->GetConfigurationForParent();// jh test
         
-        $this->Update();
+        //Update Ip and Port
+        $ip = $this->ReadPropertyString('Ip');
+        $port = $this->ReadPropertyString('Port');
+        //$this->Update();
         }
     
         public function Update()

@@ -62,7 +62,7 @@ class SharpTV extends IPSModule // Sharp Aquos TV
             echo "Unable to open\n";
             } else {
                 fwrite($socket, $command);
-                stream_set_timeout($socket, 2);
+                stream_set_timeout($socket, 10);
                 $buf = fread($socket, 2000);
                 
                 $info = stream_get_meta_data($socket);

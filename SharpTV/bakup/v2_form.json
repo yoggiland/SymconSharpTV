@@ -1,0 +1,19 @@
+{
+    "elements":
+    [
+        { "type": "Label", "label": "IP-Symcon module for IP control of Sharp Aquos TV" },
+        { "type": "Label", "label": "Leave ID and Password empty if the TV is not setup for login" },
+		{ "name": "id", "type": "ValidationTextBox", "caption": "ID" },
+		{ "name": "password", "type": "ValidationTextBox", "caption": "Password" },
+        { "name": "ip", "type": "ValidationTextBox", "caption": "IP-Address" },
+        { "name": "port", "type": "ValidationTextBox", "caption": "Port" } 
+    ],
+    "actions":
+    [
+		{ "type": "Button", "label": "Power", "onClick": "SharpTV_Power($id)" },
+        { "type": "Button", "label": "Power On", "onClick": "SharpTV_PowerOn($id)" },
+        { "type": "Button", "label": "Power Off", "onClick": "SharpTV_PowerOff($id)" },
+        { "type": "Button", "label": "Power State", "onClick": "SharpTV_PowerState($id)" },
+		{ "type": "Button", "label": "Lese Daten der Lampe ein", "onClick": "SharpTV_readStatesFromDevice($id);" }
+    ]   
+}

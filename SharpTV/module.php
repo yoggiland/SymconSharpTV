@@ -17,6 +17,7 @@ class SharpTV extends IPSModule // Sharp Aquos TV
         $this->RegisterPropertyString("Ip", "192.168.1.102");
         $this->RegisterPropertyString("Port", 10002);
         
+        // Register Script
         $this->RegisterScript("PowerOn", "Power On", "<? SharpTV_PowerOn(".$this->InstanceID.");", 2);
 		$this->RegisterScript("PowerOff", "Power Off", "<? SharpTV_PowerOff(".$this->InstanceID.");", 3); // int is order listed
         
@@ -32,9 +33,7 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 		$this->RegisterVariableBoolean("State", "Status", "~Switch", 1);
 		$this->EnableAction("State");
         
-        //$this->GetConfigurationForParent();// jh test
-        
-        //Update Ip and Port
+        // Ip and Port
         $ip = $this->ReadPropertyString('Ip');
         $port = $this->ReadPropertyString('Port');
         //$this->Update();
@@ -115,7 +114,7 @@ protected function SendToSharpTV($command) // e.g function PowerOn() calls this 
 */
 
 	// Power On
-	public function PowerOn() // steg 1
+	public function PowerOn()
 	{
         $command = 'POWR1   ';
 		$result = $this->SendToSharpTV($command);
@@ -131,7 +130,7 @@ protected function SendToSharpTV($command) // e.g function PowerOn() calls this 
 	}
 
 
-	public function ReceiveData($JSONString)
+	public function ReceiveData($JSONString) // not in use
 	{
 		$data = json_decode($JSONString);
 		$objectid = $data->Buffer->objectid;
@@ -143,7 +142,7 @@ protected function SendToSharpTV($command) // e.g function PowerOn() calls this 
 		}
 	}
 
-	// gui on off knapp kalla denna funktion
+	// GUI on off knapp calls this funktion
 	public function RequestAction($Ident, $Value)
 	{
 		IPS_LogMessage("SharpTV", "422 GUI On Off "); // JH

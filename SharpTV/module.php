@@ -1,6 +1,7 @@
 <?
-
+//
 // https://github.com/Wolbolar/IPSymconTPLinkHS110
+// https://github.com/nik78476/SymconMeteoblue
 
 class SharpTV extends IPSModule // Sharp Aquos TV
 {
@@ -15,7 +16,10 @@ class SharpTV extends IPSModule // Sharp Aquos TV
         // Configuration Values
         $this->RegisterPropertyString("Ip", "192.168.1.102");
         $this->RegisterPropertyString("Port", 10002);
-		
+        
+        $this->RegisterScript("PowerOn", "Power On", "<? SharpTV_PowerOff(".$this->InstanceID.");", 0);
+		$this->RegisterScript("PowerOff", "Power Off", "<? SharpTV_PowerOff(".$this->InstanceID.");", 1);
+        
         //we will wait until the kernel is ready
 		$this->RegisterMessage(0, IPS_KERNELMESSAGE);
 	}
@@ -36,26 +40,16 @@ class SharpTV extends IPSModule // Sharp Aquos TV
         //$this->Update();
         }
     
-        public function Update()
+        public function Update() // not in use
         {
             IPS_LogMessage("SharpTV", "Update called ");
             
             //Ip and Port update // test
             $ip = $this->ReadPropertyString('Ip');
             $port = $this->ReadPropertyString('Port');
-            }
-    
-    public function GetConfigurationForParent()
-    {
-        IPS_LogMessage("SharpTV", "GetConfigurationForParent called ");
-        /*
-		$ip = $this->ReadPropertyString("Ip");
-		$port = $this->ReadPropertyString("Port");
-        return "{\"Ip\": \"$ip\", \"Port\": \"$port\"}";
-        */
         }
-      
-protected function SendToSharpTV($command) // e.g function PowerOn() calls this function
+        
+    protected function SendToSharpTV($command) // e.g function PowerOn() calls this function
 	{
         $ip = $this->ReadPropertyString('Ip');
         $port = $this->ReadPropertyString('Port');

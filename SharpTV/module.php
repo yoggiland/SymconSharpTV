@@ -58,8 +58,8 @@ public function GetConfigurationForParent()
 		//$host = "192.168.1.80"; // local 192.168.1.88
 		//$port = 6002; // 55443
 		
-		$host = $this->ReadPropertyString("ip");
-		$port = $this->ReadPropertyString("port");
+		$host = $this->ReadPropertyString("Ip");
+		$port = $this->ReadPropertyString("Port");
         return "{\"Host\": \"$host\", \"Port\": \"$port\"}";
     }
 

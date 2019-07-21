@@ -1,29 +1,18 @@
 {
     "elements":
-            [
-				{ "type": "Label", "label": "Sharp Aquos TV ip address"},
-				{
-                    "name": "Name",
-                    "type": "ValidationTextBox",
-                    "caption": "Name"
-                }
-            ],
-    "status":
-            [
-                {
-                    "code": 101,
-                    "icon": "inactive",
-                    "caption": "creating instance"
-                },
-				{
-                    "code": 102,
-                    "icon": "active",
-                    "caption": "configuration valid"
-                },
-                {
-                    "code": 104,
-                    "icon": "inactive",
-                    "caption": "Sharp Aquos TV is inactive"
-                }
-            ]
+    [
+        { "type": "Label", "label": "IP-Symcon module for IP control of Sharp Aquos TV" },
+        { "type": "Label", "label": "Leave ID and Password empty if the TV is not setup for login" },
+		{ "name": "Passwort", "type": "ValidationTextBox", "caption": "Passwort" },
+        { "name": "ip", "type": "ValidationTextBox", "caption": "Aquos TV IP-Address" },
+        { "name": "port", "type": "ValidationTextBox", "caption": "Aquos TV Port" } 
+    ],
+    "actions":
+    [
+		{ "type": "Button", "label": "Power", "onClick": "AquosTV_Power($id)" },
+        { "type": "Button", "label": "Power On", "onClick": "SharpTV_PowerOn($id)" },
+        { "type": "Button", "label": "Power Off", "onClick": "SharpTV_PowerOff($id)" },
+        { "type": "Button", "label": "Power State", "onClick": "SharpTV_PowerState($id)" },
+		{ "type": "Button", "label": "Lese Daten der Lampe ein", "onClick": "SharpTV_readStatesFromDevice($id);" }
+    ]   
 }

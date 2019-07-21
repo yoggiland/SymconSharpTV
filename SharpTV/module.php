@@ -638,11 +638,12 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 			'status' => $this->FormStatus()
 		]);
 	}
-
+*/
 	/**
 	 * return form configurations on configuration step
 	 * @return array
 	 */
+/*
 	protected function FormHead()
 	{
 		$model = $this->ReadPropertyInteger("modelselection");
@@ -849,11 +850,12 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 		}
 		return $form;
 	}
-
+*/
 	/**
 	 * return form actions by token
 	 * @return array
 	 */
+/*
 	protected function FormActions()
 	{
 		$form = [
@@ -900,11 +902,12 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 		];
 		return $form;
 	}
-
+*/
 	/**
 	 * return from status
 	 * @return array
 	 */
+/* jh
 	protected function FormStatus()
 	{
 		$form = [

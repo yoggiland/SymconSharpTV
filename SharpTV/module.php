@@ -627,6 +627,8 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 	 * build configuration form
 	 * @return string
 	 */
+     
+/*
 	public function GetConfigurationForm()
 	{
 		// return current form
@@ -940,6 +942,13 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 
 		return $form;
 	}
+    
+    */
+
+
+     /***********************************************************
+	 * End of? Configuration Form
+	 ***********************************************************/
 }
 
 ?>

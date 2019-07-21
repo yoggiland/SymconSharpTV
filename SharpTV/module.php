@@ -53,14 +53,10 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 	}
 
 public function GetConfigurationForParent()
-    {
-		//$host = $this->ReadPropertyString("ipadress");
-		//$host = "192.168.1.80"; // local 192.168.1.88
-		//$port = 6002; // 55443
-		
-		$host = $this->ReadPropertyString("Ip");
+    {	
+		$ip = $this->ReadPropertyString("Ip");
 		$port = $this->ReadPropertyString("Port");
-        return "{\"Host\": \"$host\", \"Port\": \"$port\"}";
+        return "{\"Ip\": \"$ip\", \"Port\": \"$port\"}";
     }
 
 	private function ValidateConfiguration()

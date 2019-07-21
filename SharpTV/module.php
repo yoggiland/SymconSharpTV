@@ -90,7 +90,7 @@ class SharpTV extends IPSModule // Sharp Aquos TV
              return $buf;
              }
     }
-
+}
 /* backup
 protected function SendToSharpTV($command) // e.g function PowerOn() calls this function
 	{

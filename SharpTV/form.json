@@ -5,8 +5,8 @@
         { "type": "Label", "label": "Leave ID and Password empty if the TV is not setup for login" },
 		{ "name": "id", "type": "ValidationTextBox", "caption": "ID" },
 		{ "name": "password", "type": "ValidationTextBox", "caption": "Password" },
-        { "name": "ip", "type": "ValidationTextBox", "caption": "IP-Address" },
-        { "name": "port", "type": "ValidationTextBox", "caption": "Port" } 
+        { "name": "Ip", "type": "ValidationTextBox", "caption": "IP-Address" },
+        { "name": "Port", "type": "ValidationTextBox", "caption": "Port" } 
     ],
     "actions":
     [

@@ -13,5 +13,13 @@
 		{ "type": "Button", "label": "Power", "onClick": "SharpTV_Power($id)" },
         { "type": "Button", "label": "Power On", "onClick": "SharpTV_PowerOn($id)" },
         { "type": "Button", "label": "Power Off", "onClick": "SharpTV_PowerOff($id)" }
-    ]   
+    ],
+    "status":
+    [
+        { "code": 101, "icon": "error", "caption": "Instance created" },
+        { "code": 102, "icon": "active", "caption": "Settings ok" },
+        { "code": 104, "icon": "inactive", "caption": "Update incorrect, check settings" },
+        { "code": 201, "icon": "inactive", "caption": "Module updated, reload data" },
+        { "code": 202, "icon": "error", "caption": "Configuration error" }
+    ]    
 }

@@ -61,7 +61,7 @@ protected function SendToSharpTV($command) // e.g function PowerOn() calls this 
         $port = $this->ReadPropertyString('Port');
         
         //Connect to Server
-        $socket = stream_socket_client("{$ip}:{$port}", $errno, $errstr, 0.3);
+        $socket = stream_socket_client("{$ip}:{$port}", $errno, $errstr, 30);
         
         //=================
         if (!$socket) {

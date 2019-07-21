@@ -73,7 +73,7 @@ protected function SendToSharpTV($command) // e.g function PowerOn() calls this 
     stream_set_timeout($socket, 2);
     $res = fread($socket, 2000);
 
-    $buf = stream_get_meta_data($fp);
+    $buf = stream_get_meta_data($socket);
     fclose($socket);
 
     if ($buf['timed_out']) {

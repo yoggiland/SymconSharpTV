@@ -17,8 +17,8 @@ class SharpTV extends IPSModule // Sharp Aquos TV
         $this->RegisterPropertyString("Ip", "192.168.1.102");
         $this->RegisterPropertyString("Port", 10002);
         
-        $this->RegisterScript("PowerOn", "Power On", "<? SharpTV_PowerOff(".$this->InstanceID.");", 0);
-		$this->RegisterScript("PowerOff", "Power Off", "<? SharpTV_PowerOff(".$this->InstanceID.");", 1);
+        $this->RegisterScript("PowerOn", "Power On", "<? SharpTV_PowerOn(".$this->InstanceID.");", 2);
+		$this->RegisterScript("PowerOff", "Power Off", "<? SharpTV_PowerOff(".$this->InstanceID.");", 3); // int is order listed
         
         //we will wait until the kernel is ready
 		$this->RegisterMessage(0, IPS_KERNELMESSAGE);

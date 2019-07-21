@@ -8,9 +8,15 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 	{
 		//Never delete this line!
 		parent::Create();
+        
+        //These lines are parsed on Symcon Startup or Instance creation
+        //You cannot use variables here. Just static values.
+        
+        // Configuration Values
         $this->RegisterPropertyString("Ip", "192.168.1.102");
         $this->RegisterPropertyString("Port", 10002);
-		//we will wait until the kernel is ready
+		
+        //we will wait until the kernel is ready
 		$this->RegisterMessage(0, IPS_KERNELMESSAGE);
 	}
 
@@ -19,16 +25,25 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 		//Never delete this line!
 		parent::ApplyChanges();
         
-        //IP Prüfen // test
-        $ip = $this->ReadPropertyString('Ip');
-        $port = $this->ReadPropertyString('Port');
+
         
         
 		$this->RegisterVariableBoolean("State", "Status", "~Switch", 1);
 		$this->EnableAction("State");
         
-        $this->GetConfigurationForParent();// jh test
+        //$this->GetConfigurationForParent();// jh test
+        
+        $this->Update();
         }
+    
+        public function Update()
+        {
+            IPS_LogMessage("SharpTV", "Update called ");
+            
+            //Ip and Port update // test
+            $ip = $this->ReadPropertyString('Ip');
+            $port = $this->ReadPropertyString('Port');
+            }
     
     public function GetConfigurationForParent()
     {

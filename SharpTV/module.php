@@ -36,7 +36,11 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 
 		$this->RegisterVariableBoolean("State", "Status", "~Switch", 1);
 		$this->EnableAction("State");
+        
+        $this->GetConfigurationForParent();// jh test
+        
 		$model = $this->ReadPropertyInteger("modelselection");
+        
 		if ($model == 2) {
 			$this->RegisterProfile('TPLinkHS.Milliampere', '', '', " mA", 0, 0, 0, 0, 2);
 
@@ -47,6 +51,17 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 		}
 		//$this->ValidateConfiguration(); // temp avstangd
 	}
+
+public function GetConfigurationForParent()
+    {
+		//$host = $this->ReadPropertyString("ipadress");
+		//$host = "192.168.1.80"; // local 192.168.1.88
+		//$port = 6002; // 55443
+		
+		$host = $this->ReadPropertyString("ip");
+		$port = $this->ReadPropertyString("port");
+        return "{\"Host\": \"$host\", \"Port\": \"$port\"}";
+    }
 
 	private function ValidateConfiguration()
 	{

@@ -62,30 +62,29 @@ protected function SendToSharpTV($command) // e.g function PowerOn() calls this 
         
         //Connect to Server
         $socket = stream_socket_client("{$ip}:{$port}", $errno, $errstr, 3);
-            //=============================================
-            if (!$socket) {
-    echo "Unable to open\n";
-} else {
-
-    fwrite($socket, $command);
-    stream_set_timeout($socket, 2);
-    $buf = fread($socket, 2000);
-
-    $info = stream_get_meta_data($socket);
-    fclose($socket);
-
-    if ($info['timed_out']) {
-        echo 'Connection timed out!';
-    } else {
-        //return $buf;
-        echo $buf;
+        
+        if (!$socket) {
+            echo "Unable to open\n";
+            } else {
+                fwrite($socket, $command);
+                stream_set_timeout($socket, 2);
+                $buf = fread($socket, 2000);
+                
+                $info = stream_get_meta_data($socket);
+                
+                fclose($socket);
+                
+                if ($info['timed_out']) {
+                    echo 'Connection timed out!';
+                    } else {
+                        //echo $buf;
+                        IPS_LogMessage("SharpTV", "Message recived " . $buf);
+                        return $buf;
+                        }
+                    }
     }
 
-}
-            //=============================================
-            return $buf;
-} // spara
-//}
+
 /* backup
 protected function SendToSharpTV($command) // e.g function PowerOn() calls this function
 	{

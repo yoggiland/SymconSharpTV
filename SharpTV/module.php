@@ -52,6 +52,10 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 		$this->RegisterVariableInteger("Volume", "Volume", "~Intensity.100", 2);
 		$this->EnableAction("Volume");
 		
+        // test
+        $this->RegisterVariableInteger("Volume2", "Volume2", "Volume2", 3);
+		$this->EnableAction("Volume2");
+        //
 		// ID and Password
         $id = $this->ReadPropertyString('ID');
         $password = $this->ReadPropertyString('Password');		

@@ -3,8 +3,8 @@
     [
         { "type": "Label", "label": "IP-Symcon module for IP control of Sharp Aquos TV" },
         { "type": "Label", "label": "Leave ID and Password empty if the TV is not setup for login" },
-		{ "name": "id", "type": "ValidationTextBox", "caption": "ID" },
-		{ "name": "password", "type": "ValidationTextBox", "caption": "Password" },
+		{ "name": "ID", "type": "ValidationTextBox", "caption": "ID" },
+		{ "name": "Password", "type": "ValidationTextBox", "caption": "Password" },
         { "name": "Ip", "type": "ValidationTextBox", "caption": "IP-Address" },
         { "name": "Port", "type": "ValidationTextBox", "caption": "Port" } 
     ],
@@ -12,7 +12,9 @@
     [
 		{ "type": "Button", "label": "Power", "onClick": "SharpTV_Power($id)" },
         { "type": "Button", "label": "Power On", "onClick": "SharpTV_PowerOn($id)" },
-        { "type": "Button", "label": "Power Off", "onClick": "SharpTV_PowerOff($id)" }
+        { "type": "Button", "label": "Power Off", "onClick": "SharpTV_PowerOff($id)" },
+		{ "type": "Button", "label": "Login", "onClick": "SharpTV_Login($id)" }
+		
     ],
     "status":
     [

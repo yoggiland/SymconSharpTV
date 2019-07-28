@@ -14,14 +14,27 @@ class SharpTV extends IPSModule // Sharp Aquos TV
         //You cannot use variables here. Just static values.
         
         // Configuration Values
-        $this->RegisterPropertyString("Ip", "192.168.1.102");
+		
+		$this->RegisterPropertyString("ID", "");
+		$this->RegisterPropertyString("Password", "");
+		
+        $this->RegisterPropertyString("Ip", "192.168.1.64");
         $this->RegisterPropertyString("Port", 10002);
         
         // Register Script
-        $this->RegisterScript("PowerOn", "Power On", "<? SharpTV_PowerOn(".$this->InstanceID.");", 2);
-		$this->RegisterScript("PowerOff", "Power Off", "<? SharpTV_PowerOff(".$this->InstanceID.");", 3); // int is order listed
+		
+		$this->RegisterScript("Power", "Power ?", "<? SharpTV_Power(".$this->InstanceID.");", 0);
+        $this->RegisterScript("PowerOn", "Power On", "<? SharpTV_PowerOn(".$this->InstanceID.");", 1);
+		$this->RegisterScript("PowerOff", "Power Off", "<? SharpTV_PowerOff(".$this->InstanceID.");", 2); // int is order listed
+		
+		$this->RegisterScript("GetVolume", "Get Volume", "<? SharpTV_GetVolume(".$this->InstanceID.");", 3);
+		$this->RegisterScript("SetVolume", "Set Volume", "<? SharpTV_SetVolume(".$this->InstanceID.");", 4);
+
+        $this->RegisterScript("VolumeUp", "Volume Up", "<? SharpTV_VolumeUp(".$this->InstanceID.");", 5);
         
-        //we will wait until the kernel is ready
+		$this->RegisterScript("Login", "Login", "<? SharpTV_Login(".$this->InstanceID.");", 6);
+		
+		//we will wait until the kernel is ready
 		$this->RegisterMessage(0, IPS_KERNELMESSAGE);
 	}
 
@@ -30,11 +43,19 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 		//Never delete this line!
 		parent::ApplyChanges();
         
-        IPS_LogMessage("SharpTV", "33 ApplyChanges called");
+        //IPS_LogMessage("SharpTV", "46 ApplyChanges called");
         
 		$this->RegisterVariableBoolean("State", "Status", "~Switch", 1);
 		$this->EnableAction("State");
-        
+		
+		// Volume
+		$this->RegisterVariableInteger("Volume", "Volume", "~Intensity.100", 2);
+		$this->EnableAction("Volume");
+		
+		// ID and Password
+        $id = $this->ReadPropertyString('ID');
+        $password = $this->ReadPropertyString('Password');		
+		
         // Ip and Port
         $ip = $this->ReadPropertyString('Ip');
         $port = $this->ReadPropertyString('Port');
@@ -49,76 +70,87 @@ class SharpTV extends IPSModule // Sharp Aquos TV
             $ip = $this->ReadPropertyString('Ip');
             $port = $this->ReadPropertyString('Port');
         }
-        
-    protected function SendToSharpTV($command) // e.g function PowerOn() calls this function
-	{
-        $ip = $this->ReadPropertyString('Ip');
-        $port = $this->ReadPropertyString('Port');
-        
-        //Connect to Server
-        $socket = stream_socket_client("{$ip}:{$port}", $errno, $errstr, 3);
-        
-        if (!$socket) {
-            echo "Unable to open\n";
-            } else {
-                fwrite($socket, $command);
-                stream_set_timeout($socket, 10);
-                $buf = fread($socket, 2000);
-                
-                $info = stream_get_meta_data($socket);
-                
-                fclose($socket);
-                
-                if ($info['timed_out']) {
-                    echo 'Connection timed out!';
-                    } else {
-                        //echo $buf;
-                        IPS_LogMessage("SharpTV", "Message recived " . $buf);
+		
+		protected function SendToSharpTV($command) // e.g function PowerOn() calls this function
+		{
+
+			$id = $this->ReadPropertyString('ID');
+			$password = $this->ReadPropertyString('Password');
+
+			$ip = $this->ReadPropertyString('Ip');
+			$port = $this->ReadPropertyString('Port');
+			
+			// test
+			if (!$password == ""){
+				
+				IPS_LogMessage("SharpTV", "We have password ");
+				
+			}
+			
+			if (!$id == ""){
+				
+				IPS_LogMessage("SharpTV", "We have ID ");
+				
+			}
+			
+			// test end
+			
+			//Connect to Server
+			$socket = stream_socket_client("{$ip}:{$port}", $errno, $errstr, 3); // Seconds until the connect should timeout (float e.g. 0.5)
+
+			if (!$socket) {
+				//echo "Unable to open\n";
+				IPS_LogMessage("SharpTV", "Unable to open socket " );
+				} else {
+					
+					IPS_LogMessage("SharpTV", "What command do we send to TV: " . $command );
+					fwrite($socket, $command);
+					
+					//stream_set_timeout ( resource $stream , int $seconds [, int $microseconds = 0 ] ) : bool
+					stream_set_timeout($socket, 3); // 10
+					
+					$buf = fread($socket, 1024); // 2000
+					
+					$info = stream_get_meta_data($socket);
+					
+					fclose($socket);
+					
+					if ($info['timed_out']) {
+						IPS_LogMessage("SharpTV", "Send to connection timed out " );
+						
+						} else {
+							
+                        IPS_LogMessage("SharpTV", "Message recived back from TV: " . $buf);
                         return $buf;
-                        }
-                    }
-    }
+					}
+			}
+}
 
-
-/* backup
-protected function SendToSharpTV($command) // e.g function PowerOn() calls this function
+	// Login	// $user . "\r" . $password . "\r"
+	// /*
+	public function Login() // NOT WORKING
 	{
-		$ip = $this->ReadPropertyString('Ip');
-        $port = $this->ReadPropertyString('Port');
-        
-        //Connect to Server
-        $socket = stream_socket_client("{$ip}:{$port}", $errno, $errstr, 0.3);
-        
-        if (!$socket) { // works
-            IPS_LogMessage("SharpTV", "Could not connect to socket ");
-         }
-        
-        if($socket) {
-            //Send a command
-            fwrite($socket, $command);
-            IPS_LogMessage("SharpTV", "Message sent " . $command);
-            $buf = null;
-            
-            //Receive response from server
-            //while (!feof($socket)) { // Loop until the response is finished
-            //$buf .= fread($socket, 1024); // the .= (dot) is Concatenation assignment
-            $buf = fread($socket, 1024);
-            
-            IPS_LogMessage("SharpTV", "Message recived " . $buf);
-             //}
-             //close connection
-             fclose($socket);
-             
-             $this->SendDebug("SharpTV:", "Close Socket", 0);
-             return $buf;
-             }
-    }
-*/
-
+		
+		$command = "ABCD    " . "\r" . "1234" . "\r";
+		
+		$result = $this->SendToSharpTV($command);
+		
+		return $result;
+	}
+	// */
+	
+	// Power ?
+	public function Power()
+	{
+		$command = "POWR?   \r";
+		$result = $this->SendToSharpTV($command);
+		return $result;
+	}
+	
 	// Power On
 	public function PowerOn()
 	{
-        $command = 'POWR1   ';
+        $command = "POWR1   \r";
 		$result = $this->SendToSharpTV($command);
 		return $result;
 	}
@@ -126,11 +158,41 @@ protected function SendToSharpTV($command) // e.g function PowerOn() calls this 
 	// Power Off
 	public function PowerOff()
 	{
-		$command = 'POWR0   ';
+		$command = "POWR0   \r";
 		$result = $this->SendToSharpTV($command);
 		return $result;
 	}
-
+	
+	
+		// Volume up
+	public function VolumeUp()
+	{
+		//$result = GetVolume()
+		//IPS_LogMessage("SharpTV", "Volume back: " . $result);
+	}
+	
+	// Volume down
+	public function VolumeDown()
+	{
+		//
+	}
+	
+	// Get current volume
+	public function GetVolume()
+	{
+        $command = "VOLM?   \r";
+		$result = $this->SendToSharpTV($command);
+		return $result;
+	}
+	
+	// Set current volume
+	public function SetVolume()
+	{
+        $command = "VOLM7   \r"; // temp 7
+		$result = $this->SendToSharpTV($command);
+		return $result;
+	} 
+	
 
 	public function ReceiveData($JSONString) // not in use
 	{
@@ -147,7 +209,7 @@ protected function SendToSharpTV($command) // e.g function PowerOn() calls this 
 	// GUI on off knapp calls this funktion
 	public function RequestAction($Ident, $Value)
 	{
-		IPS_LogMessage("SharpTV", "422 GUI On Off "); // JH
+		IPS_LogMessage("SharpTV", "212 RequestAction, GUI On Off "); // JH
         switch ($Ident) {
 			case "State":
 				$varid = $this->GetIDForIdent("State");
@@ -158,9 +220,34 @@ protected function SendToSharpTV($command) // e.g function PowerOn() calls this 
 					$this->PowerOff();
 				}
 				break;
+				// båda fungerar
+				// /*
+				case "Volume":
+
+					$this->SetValue($Ident, $Value);
+
+					break;
+				// */	
+				//
 			default:
 				$this->SendDebug("Request Action:", "Invalid ident", 0);
 		}
+		//  båda fungerar
+		/*
+		switch($Ident) {
+
+				case "Volume":
+
+					$this->SetValue($Ident, $Value);
+
+					break;
+
+				default:
+
+					throw new Exception("Invalid ident");
+
+			} */
+		//
 	}
 
 	/**

@@ -18,7 +18,7 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 		$this->RegisterPropertyString("ID", "");
 		$this->RegisterPropertyString("Password", "");
 		
-        $this->RegisterPropertyString("Ip", "192.168.1.64");
+        $this->RegisterPropertyString("Ip", "192.168.1.102"); // Aquos TV 192.168.1.64
         $this->RegisterPropertyString("Port", 10002);
         
         // Register Script
@@ -53,9 +53,10 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 		$this->EnableAction("Volume");
 		
         // test
-        $this->RegisterVariableInteger('Volume2', 'Volume2', 'Intensity.60');
-        $this->EnableAction('Volume2');
+        //$this->RegisterVariableInteger('Volume2', 'Volume2', 'Intensity.60');
+        //$this->EnableAction('Volume2');
         //
+        
 		// ID and Password
         $id = $this->ReadPropertyString('ID');
         $password = $this->ReadPropertyString('Password');		

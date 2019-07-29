@@ -20,6 +20,7 @@ class SharpTV extends IPSModule // Sharp Aquos TV
 		
         $this->RegisterPropertyString("Ip", "192.168.1.102"); // Aquos TV 192.168.1.64
         $this->RegisterPropertyString("Port", 10002);
+        $this->RegisterPropertyInteger("UpdateInterval", 15); // test
         
         // Register Script
 		

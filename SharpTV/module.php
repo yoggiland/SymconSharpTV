@@ -76,7 +76,7 @@ class SharpTV extends IPSModule // Sharp Aquos TV
         $this->SetSharpTVTimerInterval(); // test
         
         //$this->Update();
-        
+        $this->UpdateTVStatus();
         }
 
 ////////////

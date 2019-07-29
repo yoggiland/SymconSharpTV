@@ -25,8 +25,7 @@ class SharpTV extends IPSModule // Sharp Aquos TV
         $this->RegisterPropertyInteger("UpdateInterval", 30); 
         // $this->RegisterTimer("Update", 0, "SharpTV_getState(" . $this->InstanceID . ");");
         
-        // $this->RegisterTimer("Update", 0, "echo 'Hello World';" );
-        $this->RegisterTimer("Update", 0 );
+        $this->RegisterTimer("Update", 0, "echo 'Hello World';" );
 
         // test slut
         

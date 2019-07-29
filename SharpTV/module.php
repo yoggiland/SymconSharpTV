@@ -64,9 +64,21 @@ class SharpTV extends IPSModule // Sharp Aquos TV
         // Ip and Port
         $ip = $this->ReadPropertyString('Ip');
         $port = $this->ReadPropertyString('Port');
+        
+        $this->SetEGPMSLANTimerInterval(); // test
+        
         //$this->Update();
         }
-    
+
+////////////
+    	protected function SetEGPMSLANTimerInterval()
+	{
+		IPS_LogMessage("SharpTV", "SetEGPMSLANTimerInterval calld " );
+        $update_interval = $this->ReadPropertyInteger('UpdateInterval');
+		$Interval = $update_interval * 1000;
+		$this->SetTimerInterval("Update", $Interval);
+	}
+///////////
         public function Update() // not in use
         {
             IPS_LogMessage("SharpTV", "Update called ");

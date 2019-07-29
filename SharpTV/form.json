@@ -6,7 +6,8 @@
 		{ "name": "ID", "type": "ValidationTextBox", "caption": "ID" },
 		{ "name": "Password", "type": "ValidationTextBox", "caption": "Password" },
         { "name": "Ip", "type": "ValidationTextBox", "caption": "IP-Address" },
-        { "name": "Port", "type": "ValidationTextBox", "caption": "Port" } 
+        { "name": "Port", "type": "ValidationTextBox", "caption": "Port" },
+        { "name": "UpdateInterval", "type": "IntervalBox", "caption": "Seconds" }
     ],
     "actions":
     [
